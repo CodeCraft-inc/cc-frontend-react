@@ -1,12 +1,12 @@
 {
-  "name": "substrate-front-end-template",
-  "version": "0.1.1",
+  "name": "cc-frontend-react",
+  "version": "0.0.1",
   "private": true,
-  "author": "Parity Technologies <admin@parity.io>",
+  "author": "Michael Assaf <xcodecraft@gmail.com>",
   "license": "Unlicense",
-  "homepage": "https://substrate-developer-hub.github.io/substrate-front-end-template",
+  "homepage": "https://github.com/CodeCraft-inc/cc-frontend-react",
   "bugs": {
-    "url": "https://github.com/substrate-developer-hub/substrate-front-end-template/issues"
+    "url": "https://github.com/CodeCraft-inc/cc-frontend-react/issues"
   },
   "keywords": [
     "substrate",
