@@ -22,6 +22,7 @@ export function Main (props) {
   const [block, setBlock] = useState(0);
   // Our `FileReader()` which is accessible from our functions below.
   let fileReader;
+
   // Takes our file, and creates a digest using the Blake2 256 hash function
   const bufferToDigest = () => {
     // Turns the file content to a hexadecimal representation.
@@ -37,6 +38,12 @@ export function Main (props) {
     fileReader = new FileReader();
     fileReader.onloadend = bufferToDigest;
     fileReader.readAsArrayBuffer(file);
+  };
+
+  // Callback function for when a new file is selected.
+  const handlePostContent = postText => {
+    const hash = blake2AsHex(postText, 256);
+    setDigest(hash);
   };
 
   // React hook to update the owner and block number information for a file
@@ -78,6 +85,12 @@ export function Main (props) {
             id="file"
             label="Your File"
             onChange={e => handleFileChosen(e.target.files[0])}
+          />
+          <Input
+            type="text"
+            id="postContent"
+            label="Your post"
+            onChange={e => handlePostContent(e.target.value)}
           />
           {/* Show this message if the file is available to be claimed */}
           <Message success header="File Digest Unclaimed" content={digest} />
