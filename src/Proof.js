@@ -52,8 +52,8 @@ export function Main (props) {
     // Polkadot-JS API query to the `proofs` storage item in our pallet.
     // This is a subscription, so it will always get the latest value,
     // even if it changes.
-    api.query.templateModule
-      .proofs(digest, result => {
+    api.query.proof
+      .posts(digest, result => {
         // Our storage item returns a tuple, which is represented as an array.
         setOwner(result[0].toString());
         setBlock(result[1].toNumber());
@@ -65,7 +65,7 @@ export function Main (props) {
     // This tells the React hook to update whenever the file digest changes
     // (when a new file is chosen), or when the storage subscription says the
     // value of the storage item has updated.
-  }, [digest, api.query.templateModule]);
+  }, [digest, api.query.proof]);
 
   // We can say a file digest is claimed if the stored block number is not 0
   function isClaimed () {
@@ -111,7 +111,7 @@ export function Main (props) {
             type="SIGNED-TX"
             disabled={isClaimed() || !digest}
             attrs={{
-              palletRpc: 'templateModule',
+              palletRpc: 'proof',
               callable: 'createClaim',
               inputParams: [digest],
               paramFields: [true]
@@ -125,7 +125,7 @@ export function Main (props) {
             type="SIGNED-TX"
             disabled={!isClaimed() || owner !== accountPair.address}
             attrs={{
-              palletRpc: 'templateModule',
+              palletRpc: 'proof',
               callable: 'revokeClaim',
               inputParams: [digest],
               paramFields: [true]
@@ -139,7 +139,7 @@ export function Main (props) {
   );
 }
 
-export default function TemplateModule (props) {
+export default function Proof (props) {
   const { api } = useSubstrate();
-  return api.query.templateModule && api.query.templateModule.proofs ? (<Main {...props} />) : null;
+  return api.query.proof && api.query.proof.posts ? (<Main {...props} />) : null;
 }
